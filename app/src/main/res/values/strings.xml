@@ -7,4 +7,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="male">ชาย</string>
+    <string name="female">หญิง</string>
+    <string name="age">อายุ</string>
+    <string name="paralysis">ประเภมอัมพาต</string>
+    <string name="muscle">กำลังกล้ามเนื้อ</string>
+    <string name="detail">รายละเอียด</string>
+
 </resources>
