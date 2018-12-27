@@ -1,8 +1,12 @@
 package gewalin.th.ac.rmutl.physical;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +50,8 @@ public class FormFragment extends Fragment {
 
 //        Age Controller
         ageController();
+
+
 
 
     }   //Main Method
@@ -122,11 +128,51 @@ public class FormFragment extends Fragment {
                     myAlert.nornalDialog("Non Gender", "Please Choose Male or Female");
                 } else if (ageABoolean) {
                     myAlert.nornalDialog("Non Choose Age", "Please Choose Age");
+                } else {
+                    confimData();
                 }
 
 
             }   //onClick
         });
+    }
+
+    private void confimData() {
+
+        String[] genderStrings = new String[]{"ชาย", "หญิง"};
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(false);
+        builder.setTitle("Confirm Data");
+        builder.setMessage("Gender ==> " + genderStrings[Integer.parseInt(genderString)] + "\n" +
+                "Age ==> " + ageString + "\n" );
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                saveData();
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+
+    }
+
+    private void saveData() {
+
+        MyManage myManage = new MyManage(getActivity());
+        myManage.addValueToSQLite(genderString, ageString, paralysisitypeString, musclepowerString, detailStrig);
+
+        Intent intent = getActivity().getIntent();
+        getActivity().finish();
+        startActivity(intent);
     }
 
     @Override
